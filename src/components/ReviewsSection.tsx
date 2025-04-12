@@ -61,7 +61,7 @@ const ReviewsSection = () => {
   ]
 
   return (
-    <section ref={containerRef} className="relative py-32 bg-gradient-to-b from-[#090E34] to-[#1A1F38] overflow-hidden">
+    <section id="reviews" ref={containerRef} className="relative py-32 bg-gradient-to-b from-[#090E34] to-[#1A1F38] overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div

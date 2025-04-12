@@ -76,7 +76,7 @@ const CatalogSection = () => {
   ]
 
   return (
-    <section ref={containerRef} className="relative py-32 bg-gradient-to-b from-[#1A1F38] to-[#090E34] overflow-hidden">
+    <section id="catalog" ref={containerRef} className="relative py-32 bg-gradient-to-b from-[#1A1F38] to-[#090E34] overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
