@@ -1,8 +1,10 @@
 'use client'
 
 import dynamic from 'next/dynamic'
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
+// Remove Header import as it's already in layout.tsx
+// import Header from '@/components/Header'
+// Remove Footer import as it's already in layout.tsx
+// import Footer from '@/components/Footer'
 
 const HeroSection = dynamic(() => import('@/components/HeroSection'), {
   ssr: false
@@ -43,7 +45,6 @@ export default function Home() {
         </div>
       </div>
       
-      <Header />
       <HeroSection />
       
       {/* Apply a small negative margin to create a better transition between sections */}
@@ -54,8 +55,6 @@ export default function Home() {
         <ReviewsSection />
         <ContactsSection />
       </div>
-      
-      <Footer />
     </main>
   )
 } 

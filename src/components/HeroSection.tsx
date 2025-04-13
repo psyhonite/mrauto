@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import { useRef, useEffect, useState } from 'react'
+import Image from 'next/image'
 
 const HeroSection = () => {
   const containerRef = useRef(null)
@@ -279,8 +280,17 @@ const HeroSection = () => {
                     transition={{ delay: 0.3, duration: 0.7 }}
                   >
                     <div className="flex items-center space-x-3">
-                      <div className="w-9 h-9 rounded-xl bg-gradient-to-r from-blue-500 to-red-500 flex items-center justify-center shadow-lg">
-                        <span className="text-white text-sm font-bold">МА</span>
+                      <div className="relative w-12 h-12 rounded-xl overflow-hidden shadow-lg">
+                        <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-red-500"></div>
+                        <div className="relative h-full w-full flex items-center justify-center p-1">
+                          <Image
+                            src="/images/logo.png"
+                            alt="МистерАвто Логотип"
+                            width={48}
+                            height={48}
+                            className="object-contain"
+                          />
+                        </div>
                       </div>
                       <div className="flex flex-col">
                         <span className="text-white text-sm font-bold tracking-wide">ОНЛАЙН ЗАПИСЬ</span>

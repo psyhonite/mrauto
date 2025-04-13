@@ -61,18 +61,34 @@ const ReviewsSection = () => {
   ]
 
   return (
-    <section id="reviews" ref={containerRef} className="relative py-32 bg-gradient-to-b from-[#090E34] to-[#1A1F38] overflow-hidden">
+    <section id="reviews" ref={containerRef} className="relative py-32 bg-gradient-to-b from-[#0A1128] to-[#1E2A45] overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
           style={{ y, opacity }}
-          className="absolute -top-20 -left-20 w-[50rem] h-[50rem] bg-gradient-to-br from-blue-600/30 to-purple-600/30 rounded-full blur-3xl"
+          className="absolute -top-20 -left-20 w-[50rem] h-[50rem] bg-gradient-to-br from-blue-600/20 to-red-600/20 rounded-full blur-3xl"
         />
         <motion.div
           style={{ y, opacity }}
-          className="absolute -bottom-20 -right-20 w-[50rem] h-[50rem] bg-gradient-to-tl from-purple-600/30 to-blue-600/30 rounded-full blur-3xl"
+          className="absolute -bottom-20 -right-20 w-[50rem] h-[50rem] bg-gradient-to-tl from-red-600/20 to-blue-600/20 rounded-full blur-3xl"
         />
         <div className="absolute inset-0 bg-[url('/images/grid.svg')] opacity-10" />
+        
+        {/* Car blueprint pattern overlay */}
+        <div className="absolute inset-0 opacity-5">
+          <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="smallGrid" width="20" height="20" patternUnits="userSpaceOnUse">
+                <path d="M 20 0 L 0 0 0 20" fill="none" stroke="white" strokeWidth="0.5"/>
+              </pattern>
+              <pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse">
+                <rect width="100" height="100" fill="url(#smallGrid)"/>
+                <path d="M 100 0 L 0 0 0 100" fill="none" stroke="white" strokeWidth="1"/>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid)" />
+          </svg>
+        </div>
         
         {/* Animated particles */}
         <div className="absolute inset-0">
@@ -110,11 +126,11 @@ const ReviewsSection = () => {
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ delay: 0.1, duration: 0.6 }}
-            className="inline-block px-4 py-1.5 bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-full text-gray-300 text-sm font-medium mb-4 backdrop-blur-sm border border-white/10"
+            className="inline-block px-4 py-1.5 bg-gradient-to-r from-blue-600/20 to-red-600/20 rounded-full text-gray-300 text-sm font-medium mb-4 backdrop-blur-sm border border-white/10"
           >
             Мнения клиентов
           </motion.span>
-          <h2 className="text-5xl sm:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 animate-gradient">
+          <h2 className="text-5xl sm:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-red-400 to-blue-400 animate-gradient">
             Отзывы клиентов
           </h2>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
@@ -132,19 +148,19 @@ const ReviewsSection = () => {
               className="group"
             >
               <div className="relative h-full">
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-xl blur-3xl group-hover:opacity-100 transition-opacity" />
-                <div className="relative h-full backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl shadow-2xl overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 to-purple-600/5 opacity-50 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-red-600/20 rounded-xl blur-3xl group-hover:opacity-100 transition-opacity" />
+                <div className="relative h-full backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl shadow-2xl overflow-hidden hover:bg-white/10 transition-colors duration-300">
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 to-red-600/5 opacity-50 group-hover:opacity-100 transition-opacity duration-500" />
                   <div className="relative z-10 p-8">
                     <div className="flex items-center mb-6">
                       <div className="relative">
-                        <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full blur-md opacity-75 group-hover:opacity-100 transition-opacity" />
-                        <div className="relative w-14 h-14 bg-gradient-to-r from-[#1A1F38] to-[#090E34] rounded-full flex items-center justify-center text-white font-bold text-xl">
+                        <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-red-600 rounded-full blur-md opacity-75 group-hover:opacity-100 transition-opacity" />
+                        <div className="relative w-14 h-14 bg-gradient-to-r from-[#0A1128] to-[#1E2A45] rounded-full flex items-center justify-center text-white font-bold text-xl group-hover:scale-110 transition-transform duration-500">
                           {review.avatar}
                         </div>
                       </div>
                       <div className="ml-4">
-                        <h3 className="text-xl font-semibold text-white">{review.name}</h3>
+                        <h3 className="text-xl font-semibold text-white group-hover:text-blue-300 transition-colors">{review.name}</h3>
                         <div className="flex items-center mt-1">
                           {[...Array(5)].map((_, i) => (
                             <motion.svg
@@ -171,11 +187,24 @@ const ReviewsSection = () => {
                       <svg className="absolute top-0 left-0 text-blue-500/20 w-8 h-8 -mt-4 -ml-3 transform -translate-y-2" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
                         <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
                       </svg>
-                      <p className="relative text-gray-300 mb-4 pl-4 italic">{review.text}</p>
+                      <p className="relative text-gray-300 mb-4 pl-4 italic group-hover:text-gray-200 transition-colors">{review.text}</p>
                     </motion.div>
-                    <div className="flex justify-end">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center">
+                        <div className="w-2 h-2 rounded-full bg-blue-500 pulse-blue mr-2"></div>
+                        <span className="text-xs text-blue-400">Проверено</span>
+                      </div>
                       <p className="text-gray-400 text-sm">{review.date}</p>
                     </div>
+                  </div>
+                  
+                  {/* Automotive-themed decorative elements */}
+                  <div className="absolute bottom-2 right-2 opacity-10 group-hover:opacity-20 transition-opacity">
+                    <svg className="w-10 h-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                      <path d="M22.5,10.5 L21,8 C20.5,7 19.5,6 17,6 L7,6 C4.5,6 3.5,7 3,8 L1.5,10.5 C1,11 1,12 1,12.5 L1,16 C1,16.5 1.5,17 2,17 L3,17 C3.5,17 4,16.5 4,16 L4,15 L20,15 L20,16 C20,16.5 20.5,17 21,17 L22,17 C22.5,17 23,16.5 23,16 L23,12.5 C23,12 23,11 22.5,10.5 Z" strokeLinecap="round" strokeLinejoin="round" />
+                      <circle cx="5.5" cy="13.5" r="1.5" />
+                      <circle cx="18.5" cy="13.5" r="1.5" />
+                    </svg>
                   </div>
                 </div>
               </div>
@@ -194,7 +223,7 @@ const ReviewsSection = () => {
             whileTap={{ scale: 0.95 }}
             className="relative group overflow-hidden rounded-xl"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl opacity-90 group-hover:opacity-100 transition-opacity" />
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-red-600 rounded-xl opacity-90 group-hover:opacity-100 transition-opacity" />
             <div className="relative px-8 py-4 text-white text-lg font-medium transition-all flex items-center justify-center">
               <span>Оставить отзыв</span>
               <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">

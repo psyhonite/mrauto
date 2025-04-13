@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import Link from 'next/link'
+import Image from 'next/image'
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -18,59 +20,38 @@ const Header = () => {
   }, [])
 
   return (
-    <header className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${isScrolled ? 'py-3 bg-[#0A1128]/80 backdrop-blur-lg shadow-lg' : 'py-5'}`}>
+    <header className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${isScrolled ? 'py-1 bg-[#0A1128]/80 backdrop-blur-lg shadow-lg' : 'py-2'}`}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <motion.div 
-            className="flex items-center space-x-2"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <div className="relative h-9 w-9 flex items-center justify-center">
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-red-600 rounded-lg opacity-90" />
-              <div className="relative text-white font-bold text-xl flex items-center justify-center">
-                МА
+          <Link href="/">
+            <motion.div 
+              className="flex items-center space-x-3"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <div className={`relative transition-all duration-300 ${isScrolled ? 'w-16 h-16' : 'w-20 h-20'}`}>
+                <Image
+                  src="/images/logo.png"
+                  alt="МистерАвто Логотип"
+                  fill
+                  className="object-contain"
+                  priority
+                />
               </div>
-              {/* Animated car outline icon appearing inside logo on scroll */}
-              <AnimatePresence>
-                {isScrolled && (
-                  <motion.div 
-                    className="absolute inset-0 flex items-center justify-center"
-                    initial={{ opacity: 0, scale: 0.5 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.5 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                      <path 
-                        d="M22.5,10.5 L21,8 C20.5,7 19.5,6 17,6 L7,6 C4.5,6 3.5,7 3,8 L1.5,10.5 C1,11 1,12 1,12.5 L1,16 C1,16.5 1.5,17 2,17 L3,17 C3.5,17 4,16.5 4,16 L4,15 L20,15 L20,16 C20,16.5 20.5,17 21,17 L22,17 C22.5,17 23,16.5 23,16 L23,12.5 C23,12 23,11 22.5,10.5 Z"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                      <circle cx="5.5" cy="13.5" r="1.5" />
-                      <circle cx="18.5" cy="13.5" r="1.5" />
-                    </svg>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-            <div>
-              <span className="text-white font-bold text-xl">МистерАвто</span>
-              {isScrolled && 
-                <motion.div 
-                  className="text-xs text-blue-400"
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  Сервис и запчасти
-                </motion.div>
-              }
-            </div>
-          </motion.div>
+              <div>
+                <div className={`font-bold transition-all duration-300 ${isScrolled ? 'text-xl' : 'text-2xl'} bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-red-400`}>
+                  МистерАвто
+                </div>
+                <div className={`text-blue-300 transition-all duration-300 ${isScrolled ? 'text-xs' : 'text-sm'}`}>
+                  сеть сервисмаркетов
+                </div>
+              </div>
+            </motion.div>
+          </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-1">
