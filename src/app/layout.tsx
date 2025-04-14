@@ -1,16 +1,16 @@
 import { Inter } from 'next/font/google'
-import { Providers } from './providers'
 import './globals.css'
-import type { Metadata } from 'next'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import { Providers } from '@/app/providers'
+import { CartProvider } from '@/context/CartContext'
 
 const inter = Inter({ subsets: ['latin', 'cyrillic'] })
 
-export const metadata: Metadata = {
-  title: 'МистерАвто.рф - Автозапчасти и автосервис',
-  description: 'Магазин автозапчастей, автосервис, автомойка и шиномонтаж. Широкий выбор запчастей, масел, аккумуляторов, шин и дисков.',
-  keywords: 'автозапчасти, автосервис, автомойка, шиномонтаж, запчасти, масла, аккумуляторы, шины, диски',
+export const metadata = {
+  title: 'МистерАвто - Автозапчасти и автосервис',
+  description: 'Магазин автозапчастей и автосервис в одном месте. Широкий ассортимент запчастей, аксессуаров и профессиональный сервис.',
+  keywords: 'автозапчасти, автосервис, ремонт авто, шины, диски, масла, аксессуары',
 }
 
 export default function RootLayout({
@@ -19,12 +19,16 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="ru" suppressHydrationWarning>
+    <html lang="ru">
       <body className={inter.className}>
         <Providers>
-          <Header />
-          {children}
-          <Footer />
+          <CartProvider>
+            <Header />
+            <main className="flex-grow">
+              {children}
+            </main>
+            <Footer />
+          </CartProvider>
         </Providers>
       </body>
     </html>

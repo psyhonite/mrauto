@@ -179,6 +179,24 @@ html {
   transform-origin: bottom center;
 }
 
+@keyframes float {
+  0% {
+    transform: translateY(0) translateX(0);
+  }
+  25% {
+    transform: translateY(-10px) translateX(10px);
+  }
+  50% {
+    transform: translateY(0) translateX(20px);
+  }
+  75% {
+    transform: translateY(10px) translateX(10px);
+  }
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+}
+
 @layer utilities {
   .backdrop-blur-xs {
     backdrop-filter: blur(2px);
